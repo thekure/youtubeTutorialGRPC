@@ -1,0 +1,62 @@
+{
+	"id": "c2d4fcc9-dee0-4348-bcb6-9cce72f540e8",
+	"brand": "Lenovo",
+	"name": "Thinkpad X1",
+	"cpu": {
+		"brand": "Intel",
+		"name": "Core i7-9750H",
+		"number_cores": 2,
+		"number_threads": 12,
+		"min_ghz": 2.5869875980472763,
+		"max_ghz": 4.201118315079158
+	},
+	"ram": {
+		"value": "43",
+		"unit": "GIGABYTE"
+	},
+	"gpus": [
+		{
+			"brand": "AMD",
+			"name": "RX 580",
+			"min_ghz": 1.0901898886745403,
+			"max_ghz": 1.530119594215726,
+			"memory": {
+				"value": "6",
+				"unit": "GIGABYTE"
+			}
+		}
+	],
+	"stoages": [
+		{
+			"driver": "SDD",
+			"memory": {
+				"value": "313",
+				"unit": "GIGABYTE"
+			}
+		},
+		{
+			"driver": "HDD",
+			"memory": {
+				"value": "5",
+				"unit": "TERABYTE"
+			}
+		}
+	],
+	"screen": {
+		"size_inch": 15.755205,
+		"resolution": {
+			"width": 3758,
+			"height": 2114
+		},
+		"panel": "IPS",
+		"multitouch": true
+	},
+	"keyboard": {
+		"layout": "QWERTY",
+		"backlit": false
+	},
+	"weight_kg": 1.6391181231627103,
+	"price_usd": 1773.1823154310196,
+	"release_year": 2019,
+	"updated_at": "2022-11-10T12:25:58.006213Z"
+}
