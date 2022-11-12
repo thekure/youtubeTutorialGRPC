@@ -11,8 +11,17 @@ import "google/protobuf/timestamp.proto";
     16 to 2047 takes 2 bytes
 */
 
-service Ping {
-    rpc ping (CPU) returns (CPU) {}
+service LaptopService {
+    rpc CreateLaptop (CreateLaptopRequest) returns (CreateLaptopResponse) {}
+}
+
+
+message CreateLaptopRequest{
+    Laptop laptop = 1;
+}
+
+message CreateLaptopResponse{
+    string id = 1;
 }
 
 message CPU{
@@ -111,4 +120,7 @@ message Laptop {
     uint32 release_year = 13;
     google.protobuf.Timestamp updated_at = 14;
 }
+
+
+
 

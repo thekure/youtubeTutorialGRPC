@@ -18,86 +18,86 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// PingClient is the client API for Ping service.
+// LaptopServiceClient is the client API for LaptopService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PingClient interface {
-	Ping(ctx context.Context, in *CPU, opts ...grpc.CallOption) (*CPU, error)
+type LaptopServiceClient interface {
+	CreateLaptop(ctx context.Context, in *CreateLaptopRequest, opts ...grpc.CallOption) (*CreateLaptopResponse, error)
 }
 
-type pingClient struct {
+type laptopServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewPingClient(cc grpc.ClientConnInterface) PingClient {
-	return &pingClient{cc}
+func NewLaptopServiceClient(cc grpc.ClientConnInterface) LaptopServiceClient {
+	return &laptopServiceClient{cc}
 }
 
-func (c *pingClient) Ping(ctx context.Context, in *CPU, opts ...grpc.CallOption) (*CPU, error) {
-	out := new(CPU)
-	err := c.cc.Invoke(ctx, "/ytTut.Ping/ping", in, out, opts...)
+func (c *laptopServiceClient) CreateLaptop(ctx context.Context, in *CreateLaptopRequest, opts ...grpc.CallOption) (*CreateLaptopResponse, error) {
+	out := new(CreateLaptopResponse)
+	err := c.cc.Invoke(ctx, "/ytTut.LaptopService/CreateLaptop", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// PingServer is the server API for Ping service.
-// All implementations must embed UnimplementedPingServer
+// LaptopServiceServer is the server API for LaptopService service.
+// All implementations must embed UnimplementedLaptopServiceServer
 // for forward compatibility
-type PingServer interface {
-	Ping(context.Context, *CPU) (*CPU, error)
-	mustEmbedUnimplementedPingServer()
+type LaptopServiceServer interface {
+	CreateLaptop(context.Context, *CreateLaptopRequest) (*CreateLaptopResponse, error)
+	mustEmbedUnimplementedLaptopServiceServer()
 }
 
-// UnimplementedPingServer must be embedded to have forward compatible implementations.
-type UnimplementedPingServer struct {
+// UnimplementedLaptopServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedLaptopServiceServer struct {
 }
 
-func (UnimplementedPingServer) Ping(context.Context, *CPU) (*CPU, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+func (UnimplementedLaptopServiceServer) CreateLaptop(context.Context, *CreateLaptopRequest) (*CreateLaptopResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateLaptop not implemented")
 }
-func (UnimplementedPingServer) mustEmbedUnimplementedPingServer() {}
+func (UnimplementedLaptopServiceServer) mustEmbedUnimplementedLaptopServiceServer() {}
 
-// UnsafePingServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PingServer will
+// UnsafeLaptopServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to LaptopServiceServer will
 // result in compilation errors.
-type UnsafePingServer interface {
-	mustEmbedUnimplementedPingServer()
+type UnsafeLaptopServiceServer interface {
+	mustEmbedUnimplementedLaptopServiceServer()
 }
 
-func RegisterPingServer(s grpc.ServiceRegistrar, srv PingServer) {
-	s.RegisterService(&Ping_ServiceDesc, srv)
+func RegisterLaptopServiceServer(s grpc.ServiceRegistrar, srv LaptopServiceServer) {
+	s.RegisterService(&LaptopService_ServiceDesc, srv)
 }
 
-func _Ping_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CPU)
+func _LaptopService_CreateLaptop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateLaptopRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PingServer).Ping(ctx, in)
+		return srv.(LaptopServiceServer).CreateLaptop(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ytTut.Ping/ping",
+		FullMethod: "/ytTut.LaptopService/CreateLaptop",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PingServer).Ping(ctx, req.(*CPU))
+		return srv.(LaptopServiceServer).CreateLaptop(ctx, req.(*CreateLaptopRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Ping_ServiceDesc is the grpc.ServiceDesc for Ping service.
+// LaptopService_ServiceDesc is the grpc.ServiceDesc for LaptopService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Ping_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "ytTut.Ping",
-	HandlerType: (*PingServer)(nil),
+var LaptopService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "ytTut.LaptopService",
+	HandlerType: (*LaptopServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ping",
-			Handler:    _Ping_Ping_Handler,
+			MethodName: "CreateLaptop",
+			Handler:    _LaptopService_CreateLaptop_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
