@@ -77,3 +77,34 @@ func (server *LaptopServer) CreateLaptop(
 
 	return response, nil
 }
+
+// SearchLaptop is a server streaming RPC to search for laptops
+func (server *LaptopServer) SearchLaptop(
+	request *ytTut.SearchLaptopRequest,
+	stream ytTut.LaptopService_SearchLaptopServer,
+) error {
+	filter := request.GetFilter()
+	log.Printf("receive a search-laptop request with filter: %v", filter)
+
+	err := server.Store.Search(
+		stream.Context(),
+		filter,
+		func(laptop *ytTut.Laptop) error {
+			response := &ytTut.SearchLaptopResponse{Laptop: laptop}
+
+			err := stream.SendMsg(response)
+			if err != nil {
+				return err
+			}
+
+			log.Printf("sent laptop with id: %s", laptop.GetId())
+			return nil
+		},
+	)
+
+	if err != nil {
+		return status.Errorf(codes.Internal, "unexpected error: %v", err)
+	}
+
+	return nil
+}
